@@ -2,10 +2,10 @@ from app.db import db, BaseModelMixin
 
 class Film(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.String)
+    title = db.Column(db.String(150))
     length = db.Column(db.Integer)
     year = db.Column(db.Integer)
-    director = db.Column(db.String)
+    director = db.Column(db.String(150))
     actors = db.relationship('Actor', backref='film', lazy = False, cascade = 'all, delete-orphan')
 
     def __init__(self, title, length, year, director, actors=[]):
@@ -23,7 +23,7 @@ class Film(db.Model, BaseModelMixin):
 
 class Actor(db.Model, BaseModelMixin):
     id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(250))
     film_id = db.Column(db.Integer, db.ForeignKey('film.id'), nullable= False)
 
     def __init__(self, name):
